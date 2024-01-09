@@ -1,6 +1,6 @@
 <?php
 
-class Categorie
+class Category
 {
 
     private $idCategory;
@@ -18,35 +18,35 @@ class Categorie
         $this->pictureCategory = $pictureCategory;
     }
 
-    public function getidCategory()
+    public function getIdCategory()
     {
         return $this->idCategory;
     }
-    public function setidCategory($idCategory)
+    public function setIdCategory($idCategory)
     {
         $this->idCategory = $idCategory;
     }
-    public function getnameCategory()
+    public function getNameCategory()
     {
         return $this->nameCategory;
     }
-    public function setnameCategory($nameCategory)
+    public function setNameCategory($nameCategory)
     {
         $this->nameCategory = $nameCategory;
     }
-    public function getdescription()
+    public function getDescription()
     {
         return $this->description;
     }
-    public function setdescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
     }
-    public function getpictureCategory()
+    public function getPictureCategory()
     {
         return $this->pictureCategory;
     }
-    public function setpictureCategory($pictureCategory)
+    public function setPictureCategory($pictureCategory)
     {
         $this->pictureCategory = $pictureCategory;
     }
