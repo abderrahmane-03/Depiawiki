@@ -1,7 +1,7 @@
 <?php 
 require_once("../libraries/Database.php");
 require_once("ITag.php");
-require_once("../models/Tag.php");
+require_once("../model/Tag.php");
 
 
 class TagService extends Database implements ITag {
@@ -69,6 +69,12 @@ class TagService extends Database implements ITag {
 
         return $Tag;
     
+}
+public function countTag(){
+    $pdo = $this->connect();
+$query=$pdo->query("SELECT COUNT(idTag) as Tagcount FROM tag");
+$result= $query->fetch(PDO::FETCH_OBJ);
+return $result->Tagcount;
 }
 }
 

@@ -1,7 +1,7 @@
 <?php 
 require_once("../libraries/Database.php");
 require_once("IUser.php");
-require_once("../models/User.php");
+require_once("../model/User.php");
 
 
 class UserService extends Database implements IUser {
@@ -81,6 +81,12 @@ class UserService extends Database implements IUser {
 
         return $User;
     
+}
+public function countauthor(){
+    $pdo = $this->connect();
+    $query = $pdo->query("SELECT COUNT(idUser) as authorCount FROM utilisateur WHERE nameRole='author'");
+    $result = $query->fetch(PDO::FETCH_OBJ);
+    return $result->authorCount;
 }
 }
 

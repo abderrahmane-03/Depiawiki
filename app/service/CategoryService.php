@@ -1,7 +1,7 @@
 <?php 
 require_once("../libraries/Database.php");
 require_once("ICategory.php");
-require_once("../models/Category.php");
+require_once("../model/Category.php");
 
 
 class CategoryService extends Database implements ICategory {
@@ -42,11 +42,11 @@ class CategoryService extends Database implements ICategory {
             $description = $Category->getDescription();
             $PictureCategory = $Category->getPictureCategory();
     
-            $sql = "UPDATE Category SET idCategory = :idCategory, nameCategory = :nameCategory, PictureCategory = :PictureCategory WHERE idCategory = :CategoryId";
+            $sql = "UPDATE Category SET idCategory = :idCategory, nameCategory = :nameCategory,description, PictureCategory = :PictureCategory WHERE idCategory = :CategoryId";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':CategoryId', $CategoryId, PDO::PARAM_INT);
             $stmt->bindParam(':idCategory', $idCategory);
             $stmt->bindParam(':nameCategory', $nameCategory);
+            $stmt->bindParam(':description', $description);
             $stmt->bindParam(':PictureCategory', $PictureCategory);
     
             $stmt->execute();
@@ -77,6 +77,12 @@ class CategoryService extends Database implements ICategory {
 
         return $Category;
     
+}
+public function countCategory(){
+    $pdo = $this->connect();
+$query=$pdo->query("SELECT COUNT(idCategory) as Categorycount FROM Category");
+$result= $query->fetch(PDO::FETCH_OBJ);
+return $result->Categorycount;
 }
 }
 

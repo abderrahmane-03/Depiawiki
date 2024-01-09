@@ -5,5 +5,6 @@ interface ICategory {
     function edit(Category $Category);
     function delete($CategoryId);
     function display();
+    function countcategory();
 }
 ?>

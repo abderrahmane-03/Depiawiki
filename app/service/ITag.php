@@ -5,5 +5,7 @@ interface ITag {
     function edit(Tag $Tag);
     function delete($TagId);
     function display();
+    
+    function countTag();
 }
 ?>

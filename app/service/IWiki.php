@@ -5,5 +5,7 @@ interface IWiki {
     function edit(Wiki $Wiki);
     function delete($WikiId);
     function display();
+    
+    function countWiki();
 }
 ?>

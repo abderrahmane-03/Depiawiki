@@ -1,18 +1,5 @@
 <?php
-include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/UserService.php");
-include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/WikiService.php");
-include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/TagService.php");
-include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.php");
-
-                        $UserService = new UserService();
-                        $authorcount = $UserService->countauthor();
-                        $WikiService = new WikiService();
-                        $wikicount = $WikiService->countWiki();
-                        $tagService = new tagService();
-                        $tagcount = $tagService->counttag();
-                        $categoryService = new categoryService();
-                        $categorycount = $categoryService->countcategory();
-                    
+include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.php");                   
 ?>
 
 <!DOCTYPE html>
@@ -121,91 +108,8 @@ include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.
 
             <div class="flex-1 p-4 w-full md:w-1/2">
 
-                <div class="mt-8 flex flex-wrap space-x-0 space-y-2 md:space-x-4 md:space-y-0">
-                    <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-
-                        <h2 class="flex text-gray-500 text-lg font-semibold pb-1"> <svg
-                                class="mr-3 w-6 h-6 text-gray-800 dark:text-gray" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z" />
-                            </svg>
-                            authors</h2>
-                        <div class="my-1"></div>
-                        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                        <div class="flex">
-                            <span class="py-2 px-8 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                            <?= $authorcount ?>
-                            </span>
-                            <h3
-                                class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                Active authors</h3>
-                        </div>
-                    </div>
-
-                    <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                        <h2 class="flex text-gray-500 text-lg font-semibold pb-1"><svg class="mr-3 w-6 h-6 text-gray-800 dark:text-gray"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 20 16">
-                                <path d="M18 0H6a2 2 0 0 0-2 2h10a4 4 0 0 1 4 4v6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z" />
-                                <path d="M14 16H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z" />
-                                <path d="M8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
-                            </svg>categories</h2>
-                        <div class="my-1"></div>
-                        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                        <div class="flex">
-
-                            <span class="py-2 px-16 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                            <?= $categorycount ?>
-                            </span>
-                            <h3
-                                class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                categories</h3>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="mt-8 flex flex-wrap space-x-0 space-y-2 md:space-x-4 md:space-y-0">
-                    <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                        <h2 class="flex text-gray-500 text-lg font-semibold pb-1"><svg class="mr-3 w-6 h-6 text-gray-800 dark:text-gray"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 20 18">
-                                <path
-                                    d="M18 0H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3.546l3.2 3.659a1 1 0 0 0 1.506 0L13.454 14H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-8 10H5a1 1 0 0 1 0-2h5a1 1 0 1 1 0 2Zm5-4H5a1 1 0 0 1 0-2h10a1 1 0 1 1 0 2Z" />
-                            </svg>wikis</h2>
-                        <div class="my-1"></div>
-                        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                        <div class="flex">
-                            <span class="py-2 px-10 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                            <?= $wikicount ?>
-                            </span>
-                            <h3
-                                class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                Active wikis</h3>
-
-                        </div>
-                    </div>
-                    <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
-                        <h2 class="flex text-gray-500 text-lg font-semibold pb-1"><svg class="mr-3 w-6 h-6 text-gray-800 dark:text-gray aria-hidden="
-                                true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
-                                <path
-                                    d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
-                            </svg>tags</h2>
-                        <div class="my-1"></div>
-                        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
-                        <div class="flex">
-
-                            <span class="py-2 px-16 bg-grey-lightest font-bold uppercase text-l text-grey-light ">
-                            <?= $tagcount ?>
-                            </span>
-                            <h3
-                                class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                tags</h3>
-                        </div>
-                    </div>
-                </div>
+                
+                
 
             </div>
 

@@ -5,5 +5,7 @@ interface IUser {
     function edit(User $User);
     function delete($UserId);
     function display();
+    
+    function countauthor();
 }
 ?>
