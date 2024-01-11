@@ -42,7 +42,7 @@ class CategoryService extends Database implements ICategory {
             $description = $Category->getDescription();
             $PictureCategory = $Category->getPictureCategory();
     
-            $sql = "UPDATE Category SET idCategory = :idCategory, nameCategory = :nameCategory,description, PictureCategory = :PictureCategory WHERE idCategory = :CategoryId";
+            $sql = "UPDATE Category SET idCategory = :idCategory, nameCategory = :nameCategory, description= :description, PictureCategory = :PictureCategory WHERE idCategory = :idCategory";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':idCategory', $idCategory);
             $stmt->bindParam(':nameCategory', $nameCategory);
@@ -59,7 +59,7 @@ class CategoryService extends Database implements ICategory {
     }
     function delete($CategoryId){
         $pdo = $this->connect();
-    $sql = "DELETE FROM Category WHERE idCategory = :CategoryId";
+    $sql = "DELETE FROM category WHERE idCategory = :CategoryId";
 
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(":CategoryId",$CategoryId, PDO::PARAM_INT);

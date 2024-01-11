@@ -10,7 +10,7 @@ class Category
     
 
 
-    public function __construct($idCategory, $nameCategory, $description, $pictureCategory)
+    public function __construct($idCategory, $nameCategory, $pictureCategory, $description)
     {
         $this->idCategory = $idCategory;
         $this->nameCategory = $nameCategory;

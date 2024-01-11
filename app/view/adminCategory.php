@@ -1,5 +1,7 @@
 <?php
-include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.php");                   
+include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/CategoryService.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -28,11 +30,11 @@ include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.
             <div class="space-x-5">
                 <button>
                     <a href="../view/archivedwikis.php">
-                    <svg class="w-6 h-6 text-gray-800 dark:text-gray-500" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                        <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
-                            d="M8 8v1h4V8m4 7H4a1 1 0 0 1-1-1V5h14v9a1 1 0 0 1-1 1ZM2 1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" />
-                    </svg></a>
+                        <svg class="w-6 h-6 text-gray-800 dark:text-gray-500" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linejoin="round" stroke-width="2"
+                                d="M8 8v1h4V8m4 7H4a1 1 0 0 1-1-1V5h14v9a1 1 0 0 1-1 1ZM2 1h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z" />
+                        </svg></a>
                 </button>
                 <button>
                     <svg class="mr-4 w-6 h-6 text-gray-800 dark:text-gray-500" aria-hidden="true" viewBox="0 0 20 18"
@@ -105,16 +107,130 @@ include_once ($_SERVER["DOCUMENT_ROOT"]."/depiawiki/app/service/CategoryService.
 
 
             </div>
-
             <div class="flex-1 p-4 w-full md:w-1/2">
+                <div class="text-right mt-4">
+                    <button id="addBtn" class="mr-4 bg-cyan-500 text-white px-4 py-2 rounded">Add category</button>
+                </div>
+                <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <?php
+                    $categoryService = new CategoryService;
+                    $categories = $categoryService->display();
+                    foreach ($categories as $categorie): ?>
+                        <div class="flex-1  p-4  min-w-md max-w-md">
+                            <div class="mt-8">
+                                <div class="flex flex-wrap space-x-0 space-y-2 md:space-x-4 md:space-y-0">
+                                    <div class="flex-1 bg-white p-4 shadow rounded-lg md:w-1/2">
 
-                
-                
+                                        <h2 class="flex justfy-between text-gray-500 text-lg font-semibold pb-1">
+                                            <img src="../../public/images/<?= $categorie['pictureCategory']; ?>"
+                                                class="w-52 h-28" alt="" srcset="">
+                                        </h2><span class=" flex justify-between py-2 px-8 bg-grey-lightest font-bold uppercase
+                                            text-l text-grey-light ">
+                                            <?= $categorie['nameCategory']; ?>
+                                            <div class="flex">
+                                                <p class="px-4">id:<?= $categorie['idCategory']; ?>
+                                                </p>
+                                                <form method="post">
+                                                    <input type="hidden" name="idCategory">
+                                                    <button type="button"
+                                                        onclick="showeditModal(<?= $categorie['idCategory'] ?>)">
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-gray-500"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="currentColor" viewBox="0 0 20 18">
+                                                            <path
+                                                                d="M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z" />
+                                                            <path
+                                                                d="M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z" />
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                <form action="../controller/Category.php" method="POST">
+                                                    <input type="hidden" name="deletecategory">
+                                                    <input type="hidden" name="delete_category_ID"
+                                                        value="<?= $categorie['idCategory'] ?>">
+                                                    <button type="submit" data-modal-toggle="delete-product-modal">
 
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-gray-500"
+                                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                            fill="currentColor" viewBox="0 0 18 20">
+                                                            <path
+                                                                d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z" />
+                                                        </svg>
+                                                        </a>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </span>
+                                        <div class="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mb-6"></div>
+                                        <div class="flex">
+                                            <div class="my-1">
+                                                <?= $categorie['description']; ?>
+                                            </div>
+                                        </div>
+                                        <h3
+                                            class="py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
+        </div>
 
+        <div id="addModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden items-center flex justify-center">
+            <div class="bg-white p-8 rounded shadow-lg w-96">
+                <h2 class="text-2xl font-bold mb-4">Add Category</h2>
+                <form id="addForm" action="../controller/Category.php" method="post" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="title" class="block text-sm font-semibold text-gray-600">title:</label>
+                        <input type="text" id="title" name="title" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-semibold text-gray-600">discreption:</label>
+                        <input type="text" id="description" name="description" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="categorypic" class="block text-sm font-semibold text-gray-600">category pic:</label>
+                        <input type="file" id="categorypic" name="categorypic" class="w-full p-2 border rounded">
+                    </div>
+
+                    <button type="submit" name="addCategory" class="bg-cyan-500 text-white px-4 py-2 rounded">Add
+                        Category</button>
+                    <button type="button" id="closeAddModal"
+                        class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                </form>
+            </div>
+        </div>
+        <div id="editModal"
+            class="fixed inset-0 bg-gray-900 bg-opacity-80 backdrop-blur-sm hidden items-center flex justify-center">
+            <div class="bg-white p-8 rounded shadow-lg w-96">
+                <h2 class="text-2xl font-bold mb-4">edite Category</h2>
+                <form method="post" action="../controller/Category.php" enctype="multipart/form-data">
+                    <div class="mb-4">
+                        <label for="title" class="block text-sm font-semibold text-gray-600">Title:</label>
+                        <input type="text" id="title" name="title" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="categorypic" class="block text-sm font-semibold text-gray-600">category pic:</label>
+                        <input type="file" id="categorypic" name="categorypic" class="w-full p-2 border rounded">
+                    </div>
+                    <div class="mb-4">
+                        <label for="description" class="block text-sm font-semibold text-gray-600">description:</label>
+                        <input type="text" id="description" name="description" class="w-full p-2 border rounded">
+                    </div>
+                    <input type="hidden" id="idCategory" name="idCategory">
+                    <button type="submit" name="editCategory" action="../controller/Category.php"
+                        onclick="hideeditModal()" class="bg-cyan-500 text-black px-4 py-2 rounded">edit
+                        Category</button>
+                    <button type="button" id="closeeditModal" onclick="hideeditModal()"
+                        class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                </form>
+            </div>
         </div>
     </div>
+    <script src="/depiawiki/public/js/modal.js"></script>
 </body>
 
 </html>
