@@ -36,9 +36,9 @@ class TagService extends Database implements ITag {
             $idTag = $Tag->getIdTag();
             $nameTag = $Tag->getNameTag();
     
-            $sql = "UPDATE Tag SET idTag = :idTag, nameTag = :nameTag WHERE idTag = :TagId";
+            $sql = "UPDATE Tag SET idTag = :idTag, nameTag = :nameTag WHERE idTag = :idTag";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':TagId', $idTag, PDO::PARAM_INT);
+            $stmt->bindParam(':idTag', $idTag, PDO::PARAM_INT);
             $stmt->bindParam(':nameTag', $nameTag);
     
             $stmt->execute();

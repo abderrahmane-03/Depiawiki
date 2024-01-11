@@ -85,7 +85,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/CategoryService
                     </a>
 
                     <a class="block flex text-gray-500 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-gray"
-                        href="../view/adminWkis.php">
+                        href="../view/adminWikis.php">
                         <i class="flex fas fa-store mr-2"><svg class="w-6 h-6 text-gray-800 dark:text-gray"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 20 18">
@@ -220,7 +220,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/CategoryService
                         <label for="description" class="block text-sm font-semibold text-gray-600">description:</label>
                         <input type="text" id="description" name="description" class="w-full p-2 border rounded">
                     </div>
-                    <input type="hidden" id="idCategory" name="idCategory">
+                    <input type="hidden" id="id-edit" name="id-edit">
                     <button type="submit" name="editCategory" action="../controller/Category.php"
                         onclick="hideeditModal()" class="bg-cyan-500 text-black px-4 py-2 rounded">edit
                         Category</button>

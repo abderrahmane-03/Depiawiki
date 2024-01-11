@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     elseif(isset($_POST["editCategory"])){
         
-        $Category_ID= $_POST['idCategory'];
+        $Category_ID= $_POST['id-edit'];
         $Title = $_POST['title'];
         $pictureCategory = $_FILES['categorypic']["name"];
         $description = $_POST['description'];

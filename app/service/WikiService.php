@@ -89,16 +89,27 @@ class WikiService extends Database implements IWiki
     {
         $pdo = $this->connect();
 
-        $sql = "SELECT * FROM Wiki";
+        $sql = "SELECT * FROM Wiki WHERE archived='0'";
 
         $stmt = $pdo->prepare($sql);
+
         $stmt->execute();
         $Wiki = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         return $Wiki;
 
     }
-    public function countWiki()
+    function archived(Wiki $Wiki)
+    {
+        $pdo = $this->connect();
+        $idWiki = $Wiki->getIdWiki();
+        $sql = "UPDATE Wiki SET archived = '1' WHERE idWiki = :idWiki";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':idWiki', $idWiki);
+        $stmt->execute();
+    }
+    function countWiki()
     {
         $pdo = $this->connect();
         $query = $pdo->query("SELECT COUNT(idWiki) as wikicount FROM Wiki");

@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function showeditModal(id) {
     localStorage.setItem("id", id);
-    document.getElementById('idCategory').value = id;
+    document.getElementById('id-edit').value = id;
     const editModal = document.getElementById('editModal');
     if (editModal) {
         editModal.classList.remove('hidden');
