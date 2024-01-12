@@ -70,6 +70,42 @@ class TagService extends Database implements ITag {
         return $Tag;
     
 }
+ function associateTagWithWiki($tagId, $wikiId) {
+    $pdo = $this->connect();
+
+    try {
+        $pdo->beginTransaction();
+
+        $sql = "INSERT INTO tagofwiki (idTag, idWiki) VALUES (:tagId, :wikiId)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':tagId', $tagId, PDO::PARAM_INT);
+        $stmt->bindParam(':wikiId', $wikiId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        $pdo->commit();
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        die("Error: " . $e->getMessage());
+    }
+}
+
+// Function to get all tags associated with a specific wiki
+ function getTagsForWiki($wikiId) {
+    $pdo = $this->connect();
+
+    $sql = "SELECT t.* FROM tag t
+            JOIN tagofwiki tw ON t.idTag = tw.idTag
+            WHERE tw.idWiki = :wikiId";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':wikiId', $wikiId, PDO::PARAM_INT);
+
+    $stmt->execute();
+    $tags = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $tags;
+}
 public function countTag(){
     $pdo = $this->connect();
 $query=$pdo->query("SELECT COUNT(idTag) as Tagcount FROM tag");
@@ -77,5 +113,8 @@ $result= $query->fetch(PDO::FETCH_OBJ);
 return $result->Tagcount;
 }
 }
+
+
+
 
 ?>

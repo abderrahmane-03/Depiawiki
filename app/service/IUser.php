@@ -2,10 +2,10 @@
 
 interface IUser {
     function insert(User $User);
-    function edit(User $User);
-    function delete($UserId);
     function display();
-    
+    function isEmailTaken($email);
+    function isUsernameTaken($username);
+    function validateLogin($username, $password);
     function countauthor();
 }
 ?>

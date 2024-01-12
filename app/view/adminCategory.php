@@ -97,7 +97,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/CategoryService
                 </nav>
 
                 <a class="block flex text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto"
-                    href="../public/login.php">
+                    href="/depiawiki/public/login.php">
                     <i class="fas fa-sign-out-alt mr-2"><svg class="w-6 h-6 text-gray-800 dark:text-gray"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 15">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

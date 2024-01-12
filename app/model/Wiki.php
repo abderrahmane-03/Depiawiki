@@ -5,20 +5,15 @@ class Wiki {
    private $idWiki;
    private $title;
    private $content;
+   private $wikipic;
    private $datecreated;
    private $archived;
    private $idcategory;
    private $iduser;
 
 
-   public function __construct($idWiki,$title,$content,$datecreated,$archived,$idcategory,$iduser) {
-    $this->idWiki = $idWiki;
-    $this->title = $title;
-    $this->content = $content;
-    $this->datecreated = $datecreated;
-    $this->archived = $archived;
-    $this->idcategory = $idcategory;
-    $this->iduser = $iduser;
+   public function __construct() {
+    
    }
    
    public function getIdWiki(){
@@ -38,6 +33,12 @@ public function getContent(){
 }
 public function setContent($content){
     $this->content = $content;
+}
+public function getwikipic(){
+    return $this->wikipic;
+}
+public function setwikipic($wikipic){
+    $this->wikipic = $wikipic;
 }
 public function getdatecreated(){
     return $this->datecreated;

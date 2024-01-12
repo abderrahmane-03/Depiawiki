@@ -74,7 +74,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/WikiService.php
                     </a>
 
                     <a class="block flex text-gray-500 py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white"
-                        href="../view/adminWiki.php">
+                        href="../view/adminCategory.php">
                         <i class="flex fas fa-file-alt mr-2"><svg class="w-6 h-6 text-gray-800 dark:text-gray"
                                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                 viewBox="0 0 20 16">
@@ -97,7 +97,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/WikiService.php
                 </nav>
 
                 <a class="block flex text-gray-500 py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-500 hover:text-white mt-auto"
-                    href="../public/login.php">
+                    href="/depiawiki/public/login.php">
                     <i class="fas fa-sign-out-alt mr-2"><svg class="w-6 h-6 text-gray-800 dark:text-gray"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 15">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -121,7 +121,8 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/WikiService.php
 
                                         <h2 class="flex justfy-between text-gray-500 text-lg font-semibold pb-1">
                                             <img src="../../public/images/<?= $Wiki['pictureWiki']; ?>"
-                                                class="w-52 h-28" alt="" srcset="">
+                                                class="w-52 h-28" alt="">
+                                                <?= $Wiki['dateCreated']; ?>
                                         </h2><span class=" flex justify-between py-2 px-8 bg-grey-lightest font-bold uppercase
                                             text-l text-grey-light ">
                                             <?= $Wiki['title']; ?>
@@ -136,8 +137,8 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/WikiService.php
                                                     <button type="submit" >
 
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 15">
-    <path d="M1 13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H1v7Zm5.293-3.707a1 1 0 0 1 1.414 0L8 9.586V8a1 1 0 0 1 2 0v1.586l.293-.293a1 1 0 0 1 1.414 1.414l-2 2a1 1 0 0 1-1.416 0l-2-2a1 1 0 0 1 .002-1.414ZM17 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1Z"/>
-  </svg>
+                                                    <path d="M1 13a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6H1v7Zm5.293-3.707a1 1 0 0 1 1.414 0L8 9.586V8a1 1 0 0 1 2 0v1.586l.293-.293a1 1 0 0 1 1.414 1.414l-2 2a1 1 0 0 1-1.416 0l-2-2a1 1 0 0 1 .002-1.414ZM17 0H1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1Z"/>
+                                                    </svg>
   
                                                         
                                                     </button>
