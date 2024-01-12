@@ -85,9 +85,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/WikiService.php
                 <a href="#"
                     class="font-semibold inline-block border-b-2 border-cyan-600 pb-2 pr-2 text-cyan-600">Explore</a>
 
-            </div>
-
-            <a href="#">See All</a>
+            </div>  
         </div>
 
 
