@@ -175,7 +175,7 @@ session_start();
                         $TagService = new TagService();
                         $Tags = $TagService->display();
                         foreach ($Tags as $Tag) {      
-                            echo" <input type='checkbox' id='tag' name='tag' value='$Tag[idTag]'>
+                            echo" <input type='checkbox' id='tag' name='tag[]' value='$Tag[idTag]'>
                   <label for='tag'> $Tag[nameTag]</label><br>";}?>
 </div>
                 </div>

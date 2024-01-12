@@ -3,46 +3,48 @@ require_once("../libraries/Database.php");
 require_once("IWiki.php");
 require_once("../model/Wiki.php");
 
+require_once("../model/Tag.php");
+
+require_once("../service/TagService.php");
+
+
+
 
 class WikiService extends Database implements IWiki
 {
-
-    function insert(Wiki $Wiki)
-    {
+    public function insert(Wiki $Wiki, $selectedTagIds) {
         $pdo = $this->connect();
-    
+
         try {
             $pdo->beginTransaction();
-    
-            $idWiki = $Wiki->getIdWiki();
-            $title = $Wiki->getTitle();
-            $wikipic = $Wiki->getWikipic(); // Corrected method name
-            $content = $Wiki->getContent();
-            $datecreated = $Wiki->getdatecreated();
-            $idcategory = $Wiki->getIdcategory();
-            $idUser = $Wiki->getIdUser();
-    
-            $sql = "INSERT INTO Wiki (idWiki, title, pictureWiki, content, datecreated, archived, idCategory, idUser) 
-                    VALUES (:idWiki, :title, :wikipic, :content, :datecreated, '0', :idCategory, :idUser)";
-    
+
+            // Insert a new wiki
+            $sql = "INSERT INTO Wiki (title, content, pictureWiki, dateCreated, archived, idCategory, idUser) 
+                    VALUES (:title, :content, :pictureWiki, NOW(), '0', :idCategory, :idUser)";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':idWiki', $idWiki);
-            $stmt->bindParam(':title', $title);
-            $stmt->bindParam(':wikipic', $wikipic); // Bind $wikipic
-            $stmt->bindParam(':content', $content);
-            $stmt->bindParam(':datecreated', $datecreated);
-            $stmt->bindParam(':idCategory', $idcategory);
-            $stmt->bindParam(':idUser', $idUser);
-    
+            $stmt->bindValue(':title', $Wiki->getTitle());
+            $stmt->bindValue(':content', $Wiki->getContent());
+            $stmt->bindValue(':pictureWiki', $Wiki->getWikipic());
+            $stmt->bindValue(':idCategory', $Wiki->getIdCategory());
+            $stmt->bindValue(':idUser', $Wiki->getIdUser());
             $stmt->execute();
+
+            // Get the ID of the newly added wiki
+            $newWikiId = $pdo->lastInsertId();
+
+            // Associate tags with the new wiki
+            // $this->associateTagWithWiki($newWikiId, $selectedTagIds);
+
             $pdo->commit();
+
+            return $newWikiId; // Return the ID of the newly added wiki
         } catch (PDOException $e) {
             $pdo->rollBack();
             die("Error: " . $e->getMessage());
         }
     }
     
-    
+
     function edit(Wiki $Wiki)
     {
         $pdo = $this->connect();
@@ -59,7 +61,7 @@ class WikiService extends Database implements IWiki
             $idUser = $Wiki->getIdUser();
 
             $sql = "UPDATE Wiki SET idWiki = :idWiki, title = :title, pictureWiki = :wikipic, content = :content, datecreated = :datecreated, archived = '0', idCategory = :idCategory, idUser = :idUser WHERE idWiki = :idWiki";
- $stmt = $pdo->prepare($sql);
+            $stmt = $pdo->prepare($sql);
 
             $stmt->bindParam(':idWiki', $wiki_ID);
             $stmt->bindParam(':title', $title);
@@ -68,7 +70,7 @@ class WikiService extends Database implements IWiki
             $stmt->bindParam(':datecreated', $datecreated);
             $stmt->bindParam(':idCategory', $idcategory);
             $stmt->bindParam(':idUser', $idUser);
-    
+
 
             $stmt->execute();
 
@@ -91,24 +93,25 @@ class WikiService extends Database implements IWiki
     function display()
     {
         $pdo = $this->connect();
-    
+
         $sql = "SELECT Wiki.*, Category.nameCategory FROM Wiki
                 LEFT JOIN Category ON Wiki.idCategory = Category.idCategory
                 WHERE Wiki.archived='0'";
-    
+
         $stmt = $pdo->prepare($sql);
-    
+
         $stmt->execute();
         $Wikis = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+
         return $Wikis;
     }
-    
-    
+
+
     function displayonly(wiki $Wiki)
     {
         $pdo = $this->connect();
         $idUser = $Wiki->getIdUser();
+        
         $sql = "SELECT Wiki.*, Category.nameCategory, GROUP_CONCAT(Tag.nameTag) AS tagNames
         FROM Wiki
         LEFT JOIN Category ON Wiki.idCategory = Category.idCategory
@@ -126,7 +129,7 @@ class WikiService extends Database implements IWiki
         return $Wiki;
 
     }
-    
+
     function displayarchive()
     {
         $pdo = $this->connect();

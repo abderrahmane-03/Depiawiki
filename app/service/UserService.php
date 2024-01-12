@@ -29,7 +29,7 @@ class UserService extends Database implements IUser {
     function validateLogin($username, $password) {
         $pdo = $this->connect();
 
-        $sql = "SELECT * FROM utilisateur WHERE username = :username";
+        $sql = "SELECT * FROM utilisateur WHERE username = :username ";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->execute();

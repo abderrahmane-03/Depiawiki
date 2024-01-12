@@ -10,35 +10,35 @@ $WikiService = new WikiService;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (isset($_POST['addWiki'])) {
-
-            $Title = $_POST['title'];
-            $pictureWiki = $_FILES['Wikipic']["name"];
-            $Content = $_POST['content'];
-            $Category_id = $_POST['Category_Id'];
-            $user_id = $_SESSION['user_id'];
-        
-            $Wiki = new Wiki();
-            $Wiki->setTitle($Title);
-            $Wiki->setwikipic($pictureWiki);
-            $Wiki->setContent($Content);
-            $Wiki->setIdcategory($Category_id);
-            $Wiki->setIduser($user_id);
-        
-            
-            $wikiId = $WikiService->insert($Wiki);
-            
-            $selectedTags = isset($_POST['tag']) ? $_POST['tag'] : [];
-        
-            if (!empty($selectedTags) && !empty($wikiId)) {
-                $TagService = new TagService();
-                foreach ($selectedTags as $tagId) {
-                    $TagService->associateTagWithWiki($tagId, $wikiId);
-                }
+        $Title = $_POST['title'];
+        $pictureWiki = $_FILES['Wikipic']["name"];
+        $Content = $_POST['content'];
+        $Category_id = $_POST['Category_Id'];
+        $user_id = $_SESSION['user_id'];
+    
+        $Wiki = new Wiki();
+        $Wiki->setTitle($Title);
+        $Wiki->setwikipic($pictureWiki);
+        $Wiki->setContent($Content);
+        $Wiki->setIdcategory($Category_id);
+        $Wiki->setIduser($user_id);
+    
+        $selectedTags = isset($_POST['tag']) ? $_POST['tag'] : [];
+    
+        $wikiId = $WikiService->insert($Wiki, $selectedTags);
+    
+        if (!empty($selectedTags) && !empty($wikiId)) {
+            $TagService = new TagService();
+            foreach ($selectedTags as $tagId) {
+                $TagService->associateTagWithWiki($tagId, $wikiId);
             }
-        
-            header("location:../view/authorWikis.php");
-            exit();
         }
+        // var_dump($selectedTags);
+    
+        header("location:../view/authorWikis.php");
+        exit();
+    }
+    
          elseif (isset($_POST['archivedWiki'])) {
         $Wiki_ID = $_POST['archived_Wiki_ID'];
         $Wiki = new Wiki();

@@ -6,23 +6,42 @@ $UserService = new UserService;
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-
+ 
     if (isset($_POST['login'])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
-        
+    
         $userFromDatabase = $UserService->validateLogin($username, $password);
-
+    
         if ($userFromDatabase) {
-            session_start();
-            $_SESSION['user_id'] = $userFromDatabase['idUser'];
-            $_SESSION['username'] = $userFromDatabase['username'];
-            $_SESSION['nameRole'] = $userFromDatabase['nameRole'];
-
-            header("location:/depiawiki/app/view/authorwikis.php");
-            exit();
+            $nameRole = $userFromDatabase['nameRole']; 
+    
+            if ($nameRole == 'admin') {
+                session_start();
+                $_SESSION['user_id'] = $userFromDatabase['idUser'];
+                $_SESSION['username'] = $userFromDatabase['username'];
+                $_SESSION['nameRole'] = $userFromDatabase['nameRole'];
+    
+                header("location:/depiawiki/app/view/adminIndex.php");
+                exit();
+            } elseif ($nameRole == 'author') {
+                session_start();
+                $_SESSION['user_id'] = $userFromDatabase['idUser'];
+                $_SESSION['username'] = $userFromDatabase['username'];
+                $_SESSION['nameRole'] = $userFromDatabase['nameRole'];
+    
+                header("location:/depiawiki/app/view/authorwikis.php");
+                exit();
+            } else {
+                echo "<script>
+                        setTimeout(function() {
+                            window.location.href = '/depiawiki/public/login.php?error=Invalid username or password';
+                        }, 3000); // Introduce a 3-second delay
+                      </script>";
+                exit();
+            }
         } else {
+            // Handle invalid login
             echo "<script>
                     setTimeout(function() {
                         window.location.href = '/depiawiki/public/login.php?error=Invalid username or password';
@@ -30,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </script>";
             exit();
         }
+    }
     }
 
 
@@ -67,4 +87,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("location:/depiawiki/public/login.php");
         exit();
     }
-}
+
