@@ -1,7 +1,7 @@
 <?php 
-require_once("../libraries/Database.php");
+require_once(__DIR__."/../libraries/Database.php");
 require_once("ITag.php");
-require_once("../model/Tag.php");
+require_once(__DIR__."/../model/Tag.php");
 
 
 class TagService extends Database implements ITag {
@@ -71,7 +71,6 @@ class TagService extends Database implements ITag {
     
 }
  
-// Function to get all tags associated with a specific wiki
  function getTagsForWiki($wikiId) {
     $pdo = $this->connect();
 

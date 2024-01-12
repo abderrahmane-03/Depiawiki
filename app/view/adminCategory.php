@@ -123,7 +123,7 @@ include_once($_SERVER["DOCUMENT_ROOT"] . "/depiawiki/app/service/CategoryService
 
                                         <h2 class="flex justfy-between text-gray-500 text-lg font-semibold pb-1">
                                             <img src="../../public/images/<?= $categorie['pictureCategory']; ?>"
-                                                class="w-52 h-28" alt="" srcset="">
+                                                class="w-96 h-96" alt="" srcset="">
                                         </h2><span class=" flex justify-between py-2 px-8 bg-grey-lightest font-bold uppercase
                                             text-l text-grey-light ">
                                             <?= $categorie['nameCategory']; ?>

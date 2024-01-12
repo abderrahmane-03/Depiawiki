@@ -57,16 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $Title = $_POST['title'];
         $pictureWiki = $_FILES['Wikipic']["name"];
         $Content = $_POST['content'];
-        $Category_id = $_POST['Category_Id'];
-        $user_id = $_SESSION['user_id'];
 
         $Wiki = new Wiki();
         $Wiki->setIdWiki($wiki_ID);
         $Wiki->setTitle($Title);
-        $Wiki->setwikipic($pictureWiki);
+        $Wiki->setWikipic($pictureWiki);
         $Wiki->setContent($Content);
-        $Wiki->setIdcategory($Category_id);
-        $Wiki->setIduser($user_id);
 
         $WikiService->edit($Wiki);
 

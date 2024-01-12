@@ -133,7 +133,20 @@ session_start();
                                         </div>
                                         <h3
                                             class="flex space-x-12 py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
-                                         <p>Category:<?= $Wiki['nameCategory'];?></p> <p>tag:<?=$Wiki['tagNames']?></p> 
+                                         <p class="flex"><svg class="w-6 h-6 text-gray-800 dark:text-gray"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 20 16">
+                                <path d="M18 0H6a2 2 0 0 0-2 2h10a4 4 0 0 1 4 4v6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Z" />
+                                <path d="M14 16H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2Z" />
+                                <path d="M8 13a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+                            </svg><?= $Wiki['nameCategory'];?></p> 
+                                        </h3><h3
+                                            class="flex space-x-12 py-2 px-4 bg-grey-lightest font-bold uppercase text-sm text-gray-500 border-b border-grey-light">
+                                         <p class="flex"><svg class="w-6 h-6 text-gray-800 dark:text-gray" aria-hidden="
+                                true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
+                                <path
+                                    d="M15.045.007 9.31 0a1.965 1.965 0 0 0-1.4.585L.58 7.979a2 2 0 0 0 0 2.805l6.573 6.631a1.956 1.956 0 0 0 1.4.585 1.965 1.965 0 0 0 1.4-.585l7.409-7.477A2 2 0 0 0 18 8.479v-5.5A2.972 2.972 0 0 0 15.045.007Zm-2.452 6.438a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+                            </svg><?= $Wiki['tagNames'];?></p> 
                                         </h3>
                                     </div>
                                 </div>
@@ -206,17 +219,7 @@ session_start();
                         <input type="file" id="Wikipic" name="Wikipic" class="w-full p-2 border rounded">
                     </div>
                     
-                    <div>
-                    <label for="CategoryId" class="block text-sm font-semibold text-gray-600">Select Category:</label>
-                    <select name="Category_Id"  class="w-full p-2 border rounded">
-                        <?php
-                        $CategoryService = new CategoryService();
-                        $Categorys = $CategoryService->display();
-                        foreach ($Categorys as $Category) {
-                            echo "<option value='$Category[idCategory]'>$Category[nameCategory]</option>";
-                        }
-                        ?>
-                    </select>
+                    <div>                 
                 </div>
                     <input type="hidden" id="id-edit" name="id-edit">
                     <button type="submit" name="editWiki" action="../controller/Wiki.php"

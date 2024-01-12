@@ -1,5 +1,5 @@
 <?php
-require("../config/config.php");
+require(__DIR__."/../config/config.php");
 
 class Database {
     protected $db;

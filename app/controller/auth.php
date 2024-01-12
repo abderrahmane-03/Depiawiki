@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             }
         } else {
-            // Handle invalid login
+            
             echo "<script>
                     setTimeout(function() {
                         window.location.href = '/depiawiki/public/login.php?error=Invalid username or password';
